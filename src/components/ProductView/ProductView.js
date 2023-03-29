@@ -7,6 +7,7 @@ import { useState } from 'react';
 function ProductView({ products }) {
 
   const [sideOpen, setSideOpen] = useState(true);
+  const [product, setProduct] = useState({});
 
   return (
     <div className="product-view">
@@ -17,7 +18,8 @@ function ProductView({ products }) {
             <ProductListItem
               key={item.id}
               product={item}
-              onClick={() => console.log('SELECT PRODUCT', item)}
+              isSelected={item.id === product.id}
+              onClick={() => setProduct({...item})}
             />
           )}
         </div>
@@ -29,7 +31,7 @@ function ProductView({ products }) {
             {sideOpen ? '>' : '<'}
           </div>
         </div>
-        <ProductDetails visible={sideOpen} />
+        <ProductDetails visible={sideOpen} product={product}/>
       </div>
     </div>
   );
